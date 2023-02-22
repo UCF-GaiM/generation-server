@@ -1,6 +1,6 @@
 let inputString = "";
 let index = 0;
-let delay = 100;
+let textDelay = 100;
 
 function setup() {
   createCanvas(400, 400);
@@ -26,9 +26,9 @@ function draw() {
   let lines = displayString.split("\n");
   let lineHeight = textAscent() + textDescent();
   for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
+    let lineText = lines[i];
     let y = (height + lineHeight) / 2 + lineHeight * i;
-    text(line, 50, y);
+    text(lineText, 50, y);
   }
 }
 
@@ -38,11 +38,11 @@ async function getTextFromAPI() {
   {method: "post", body: {text:"Little red riding hood went to the forest and "}});
   const data = await response.json();
   inputString = data.text;
-  delay = Math.floor(Math.random() * 200) + 50;
+  textDelay = Math.floor(Math.random() * 200) + 50;
   interval = setInterval(function() {
     index++;
     if (index > inputString.length) {
       clearInterval(interval);
     }
-  }, delay);
+  }, textDelay);
 }
