@@ -23,13 +23,7 @@ function setup() {
 
 function draw() {
   background(backgroundImage);
-    // Draw inputString at the bottom half of the canvas
-    // textAlign(LEFT);
-    // let inputStringY = height - textDescent() - 10; // 10 is a padding
-    // text(inputString, width/2, inputStringY);
-    
-    // Draw textBoxText at the top half of the canvas
-    // textAlign(LEFT);
+
     textFont('Helvetica');
     let textBoxTextY = textAscent() + 10; // 10 is a padding
     text(textBoxText, 170, textBoxTextY+40);
@@ -42,7 +36,7 @@ function draw() {
     
     for (let i = 0; i < words.length; i++) {
       let word = words[i];
-      if (textWidth(currentLine + word) < width - 100) {
+      if (textWidth(currentLine + word) < width - 170) {
         currentLine += word + " ";
       } else {
         displayString += currentLine + "\n";
