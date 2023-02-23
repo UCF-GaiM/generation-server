@@ -1,18 +1,26 @@
-let inputString = "SUFFER";
+let inputString = "This is the start";
 let index = 0;
 let textDelay = 100;
+let backgroundImage;
+
+function preload() {
+ backgroundImage = loadImage('winne.png');
+}
 
 function setup() {
   createCanvas(400, 400);
-  textSize(32);
-  const button = createButton('Generate Text');
+  background(backgroundImage);
+  textSize(22);
+  const button = createButton('Generate Response');
   button.mousePressed(getTextFromAPI);
-  userinput = createInput('WHY');
-  userinput.changed(getTextFromAPI);
+  const inputText = createInput('Enter your text here');
+  inputText.input(function() {
+    inputString = inputText.value();
+  });
 }
 
 function draw() {
-  background(255);
+  background(backgroundImage);
   let displayString = "";
   let words = inputString.split(" ");
   let currentLine = "";
@@ -37,13 +45,11 @@ function draw() {
 
 let interval;
 async function getTextFromAPI() {
-  console.log("Hello");
-  const userinput = document.querySelector('input').value;
-  
+  console.log("ello" + inputString);
   const response = await fetch("http://localhost:3000/generate", 
-  {method: "post", body: {text: userinput}});
-  console.log("Hello2");
+  {method: "post", body:{text: inputString}});
   const data = await response.json();
+  console.log(data);
   inputString = data.text;
   textDelay = Math.floor(Math.random() * 200) + 50;
   clearInterval(interval);
