@@ -4,6 +4,7 @@ let index = 0;
 let textDelay = 100;
 let backgroundImage;
 
+//loads bg image
 function preload() {
  backgroundImage = loadImage('winne.png');
 }
@@ -23,7 +24,7 @@ function setup() {
 
 function draw() {
   background(backgroundImage);
-
+    //top font more normal
     textFont('Helvetica');
     let textBoxTextY = textAscent() + 10; // 10 is a padding
     text(textBoxText, 170, textBoxTextY+40);
@@ -57,11 +58,13 @@ function draw() {
 let interval;
 async function getTextFromAPI() {
   console.log("ello" + inputString);
+  //display orginal input on top
   textBoxText = inputString;
   const response = await fetch("http://localhost:3000/generate", 
   {method: "post", body:{text: inputString}});
   const data = await response.json();
   console.log(data);
+  //AI generation on bottom
   inputString = data.text;
   
   textDelay = Math.floor(Math.random() * 200) + 50;
